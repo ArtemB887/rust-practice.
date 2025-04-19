@@ -1,32 +1,28 @@
 fn main() {
     // Constants for the envelope size
-    const WIDTH: usize = 12;  // Width
-    const HEIGHT: usize = 7;  // Height
+    const WIDTH: usize = 12;
+    const HEIGHT: usize = 7;
 
     // Draw the top part of the envelope
-    println!("****************************");
+    print!("*");
+    for _ in 1..WIDTH - 1 {
+        print!(" ");
+    }
+    println!("*");
 
-    for i in 1..HEIGHT {
-        let spaces = WIDTH - i * 2;  // Number of spaces between the stars
-        let inner_spaces = (WIDTH - 2 * i) / 2;  // Spaces for centering
-
-        // Left part of the envelope
-        print!("* ");
-        for _ in 0..i {
-            print!(" ");
-        }
-        // Centered block of stars
-        for _ in 0..spaces {
-            print!(" ");
-        }
-        // Right part of the envelope
+    // Draw the middle part of the envelope
+    for row in 1..HEIGHT - 1 {
         print!("*");
-        println!();
+        for _ in 1..WIDTH - 2 * row {
+            print!(" ");
+        }
+        println!("*");
     }
 
     // Draw the bottom part of the envelope
-    for _ in 0..WIDTH * 2 {
-        print!("*");
+    print!("*");
+    for _ in 1..WIDTH - 1 {
+        print!(" ");
     }
-    println!();
+    println!("*");
 }
