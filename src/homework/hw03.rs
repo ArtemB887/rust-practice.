@@ -1,28 +1,30 @@
+// hw03.rs
+
+const WIDTH: usize = 30;
+const HEIGHT: usize = 14;
+
 fn main() {
-    // Constants for the envelope size
-    const WIDTH: usize = 12;
-    const HEIGHT: usize = 7;
+    let mut output = String::new();
 
-    // Draw the top part of the envelope
-    print!("*");
-    for _ in 1..WIDTH - 1 {
-        print!(" ");
-    }
-    println!("*");
-
-    // Draw the middle part of the envelope
-    for row in 1..HEIGHT - 1 {
-        print!("*");
-        for _ in 1..WIDTH - 2 * row {
-            print!(" ");
+    for y in 0..=HEIGHT {
+        for x in 0..=WIDTH {
+            let ch = if y == 0 || y == HEIGHT {
+                // Top and bottom borders
+                '*'
+            } else if x == 0 || x == WIDTH {
+                // Left and right borders
+                '*'
+            } else if x == 2 * y || x == WIDTH - 2 * y {
+                // Envelope diagonals
+                '*'
+            } else {
+                // Empty space inside
+                ' '
+            };
+            output.push(ch);
         }
-        println!("*");
+        output.push('\n');
     }
 
-    // Draw the bottom part of the envelope
-    print!("*");
-    for _ in 1..WIDTH - 1 {
-        print!(" ");
-    }
-    println!("*");
+    print!("{}", output);
 }
