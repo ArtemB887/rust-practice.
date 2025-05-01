@@ -1,42 +1,33 @@
-#!/bin/python3
+use std::io;
 
-import math
-import os
-import random
-import re
-import sys
+fn diagonal_difference(matrix: &Vec<Vec<i32>>) -> i32 {
+    let n = matrix.len();
+    let mut primary = 0;
+    let mut secondary = 0;
 
-#
-# Complete the 'diagonalDifference' function below.
-#
-# The function is expected to return an INTEGER.
-# The function accepts a 2D_INTEGER_ARRAY arr as parameter.
-#
+    for i in 0..n {
+        primary += matrix[i][i];
+        secondary += matrix[i][n - 1 - i];
+    }
 
-def diagonalDifference(arr):
-    n = len(arr)
-    primary_sum = 0
-    secondary_sum = 0
+    (primary - secondary).abs()
+}
 
-    for i in range(n):
-        primary_sum += arr[i][i]
-        secondary_sum += arr[i][n - 1 - i]
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let n: usize = input.trim().parse().unwrap();
 
-    return abs(primary_sum - secondary_sum)
+    let mut matrix = Vec::with_capacity(n);
+    for _ in 0..n {
+        input.clear();
+        io::stdin().read_line(&mut input).unwrap();
+        let row: Vec<i32> = input.trim().split_whitespace()
+            .map(|s| s.parse().unwrap())
+            .collect();
+        matrix.push(row);
+    }
 
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    n = int(input().strip())
-
-    arr = []
-
-    for _ in range(n):
-        arr.append(list(map(int, input().rstrip().split())))
-
-    result = diagonalDifference(arr)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
-
+    let result = diagonal_difference(&matrix);
+    println!("{}", result);
+}
