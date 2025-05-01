@@ -1,18 +1,29 @@
-def compareTriplets(a, b):
-    alice_score = 0
-    bob_score = 0
+use std::io;
 
-    for i in range(3):
-        if a[i] > b[i]:
-            alice_score += 1
-        elif a[i] < b[i]:
-            bob_score += 1
-    # Compare each element and award points
+fn compare_triplets(a: &[i32], b: &[i32]) -> (i32, i32) {
+    let mut alice_score = 0;
+    let mut bob_score = 0;
 
-    return [alice_score, bob_score]
+    for i in 0..3 {
+        if a[i] > b[i] {
+            alice_score += 1;
+        } else if a[i] < b[i] {
+            bob_score += 1;
+        }
+    }
 
-if __name__ == '__main__':
-    a = list(map(int, input().rstrip().split()))
-    b = list(map(int, input().rstrip().split()))
-    result = compareTriplets(a, b)
-    print(' '.join(map(str, result)))
+    (alice_score, bob_score)
+}
+
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let a: Vec<i32> = input.trim().split_whitespace().map(|s| s.parse().unwrap()).collect();
+
+    input.clear();
+    io::stdin().read_line(&mut input).unwrap();
+    let b: Vec<i32> = input.trim().split_whitespace().map(|s| s.parse().unwrap()).collect();
+
+    let (alice, bob) = compare_triplets(&a, &b);
+    println!("{} {}", alice, bob);
+}
