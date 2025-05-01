@@ -1,27 +1,15 @@
-#!/bin/python3
+use std::io;
 
-import math
-import os
-import random
-import re
-import sys
+fn simple_array_sum(arr: &[i32]) -> i32 {
+    arr.iter().sum()
+}
 
-#
-# Complete the 'simpleArraySum' function below.
-#
-# The function is expected to return an INTEGER.
-# The function accepts INTEGER_ARRAY ar as parameter.
-#
-
-def simpleArraySum(ar):
-    return sum(ar)
-
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    ar_count = int(input().strip())
-    ar = list(map(int, input().rstrip().split()))
-    result = simpleArraySum(ar)
-
-    fptr.write(str(result) + '\n')
-    fptr.close()
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input.clear();
+    io::stdin().read_line(&mut input).unwrap();
+    let arr: Vec<i32> = input.trim().split_whitespace().map(|s| s.parse().unwrap()).collect();
+    let result = simple_array_sum(&arr);
+    println!("{}", result);
+}
