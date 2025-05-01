@@ -1,30 +1,21 @@
-#!/bin/python3
+use std::io;
 
-import math
-import os
-import random
-import re
-import sys
+fn a_very_big_sum(arr: &[i64]) -> i64 {
+    arr.iter().sum()
+}
 
-#
-# Complete the 'aVeryBigSum' function below.
-#
-# The function is expected to return a LONG_INTEGER.
-# The function accepts LONG_INTEGER_ARRAY ar as parameter.
-#
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    
+    input.clear();
+    io::stdin().read_line(&mut input).unwrap();
+    let arr: Vec<i64> = input
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
 
-def aVeryBigSum(ar):
-    return sum(ar)
-
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    ar_count = int(input().strip())
-
-    ar = list(map(int, input().rstrip().split()))
-
-    result = aVeryBigSum(ar)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    let result = a_very_big_sum(&arr);
+    println!("{}", result);
+}
