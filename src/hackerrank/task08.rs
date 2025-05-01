@@ -1,31 +1,23 @@
-#!/bin/python3
+use std::io::{self, BufRead};
 
-import math
-import os
-import random
-import re
-import sys
+fn birthday_cake_candles(candles: &[u32]) -> usize {
+    let max_height = candles.iter().max().unwrap();
+    candles.iter().filter(|&&c| c == *max_height).count()
+}
 
-#
-# Complete the 'birthdayCakeCandles' function below.
-#
-# The function is expected to return an INTEGER.
-# The function accepts INTEGER_ARRAY candles as parameter.
-#
+fn main() {
+    let stdin = io::stdin();
+    let mut lines = stdin.lock().lines();
+    lines.next();
+    let candles: Vec<u32> = lines
+        .next()
+        .unwrap()
+        .unwrap()
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
 
-def birthdayCakeCandles(candles):
-    tallest = max(candles)
-    return candles.count(tallest)
-
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    candles_count = int(input().strip())
-
-    candles = list(map(int, input().rstrip().split()))
-
-    result = birthdayCakeCandles(candles)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    let result = birthday_cake_candles(&candles);
+    println!("{}", result);
+}
