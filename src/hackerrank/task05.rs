@@ -1,30 +1,29 @@
-#!/bin/python3
+use std::io::{self, BufRead};
 
-import math
-import os
-import random
-import re
-import sys
+fn plus_minus(arr: &[i32]) {
+    let total = arr.len() as f64;
+    let positives = arr.iter().filter(|&&x| x > 0).count() as f64;
+    let negatives = arr.iter().filter(|&&x| x < 0).count() as f64;
+    let zeros = arr.iter().filter(|&&x| x == 0).count() as f64;
 
-#
-# Complete the 'plusMinus' function below.
-#
-# The function accepts INTEGER_ARRAY arr as parameter.
-#
+    println!("{:.6}", positives / total);
+    println!("{:.6}", negatives / total);
+    println!("{:.6}", zeros / total);
+}
 
-def plusMinus(arr):
-    n = len(arr)
-    positives = sum(1 for x in arr if x > 0)
-    negatives = sum(1 for x in arr if x < 0)
-    zeros = sum(1 for x in arr if x == 0)
+fn main() {
+    let stdin = io::stdin();
+    let mut lines = stdin.lock().lines();
 
-    print(f"{positives/n:.6f}")
-    print(f"{negatives/n:.6f}")
-    print(f"{zeros/n:.6f}")
+    lines.next();
+    let arr: Vec<i32> = lines
+        .next()
+        .unwrap()
+        .unwrap()
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
 
-if __name__ == '__main__':
-    n = int(input().strip())
-
-    arr = list(map(int, input().rstrip().split()))
-
-    plusMinus(arr)
+    plus_minus(&arr);
+}
