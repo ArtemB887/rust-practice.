@@ -1,23 +1,20 @@
-#!/bin/python3
+use std::io::{self, BufRead};
 
-import math
-import os
-import random
-import re
-import sys
+fn mini_max_sum(arr: &[u64]) {
+    let total_sum: u64 = arr.iter().sum();
+    let min = arr.iter().min().unwrap();
+    let max = arr.iter().max().unwrap();
+    println!("{} {}", total_sum - max, total_sum - min);
+}
 
-#
-# Complete the 'miniMaxSum' function below.
-#
-# The function accepts INTEGER_ARRAY arr as parameter.
-#
-
-def miniMaxSum(arr):
-    total_sum = sum(arr)
-    min_sum = total_sum - max(arr)
-    max_sum = total_sum - min(arr)
-    print(min_sum, max_sum)
-
-if __name__ == '__main__':
-    arr = list(map(int, input().rstrip().split()))
-    miniMaxSum(arr)
+fn main() {
+    let stdin = io::stdin();
+    let mut line = String::new();
+    stdin.lock().read_line(&mut line).unwrap();
+    let arr: Vec<u64> = line
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
+    mini_max_sum(&arr);
+}
