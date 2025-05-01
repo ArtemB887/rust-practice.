@@ -1,22 +1,16 @@
-#!/bin/python3
+use std::io;
 
-import math
-import os
-import random
-import re
-import sys
+fn staircase(n: usize) {
+    for i in 1..=n {
+        let spaces = " ".repeat(n - i);
+        let hashes = "#".repeat(i);
+        println!("{}{}", spaces, hashes);
+    }
+}
 
-#
-# Complete the 'staircase' function below.
-#
-# The function accepts INTEGER n as parameter.
-#
-
-def staircase(n):
-    for i in range(1, n + 1):
-        print(' ' * (n - i) + '#' * i)
-
-if __name__ == '__main__':
-    n = int(input().strip())
-
-    staircase(n)
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let n: usize = input.trim().parse().unwrap();
+    staircase(n);
+}
